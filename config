@@ -1,0 +1,24 @@
+[addresslabels]
+csvfile = sample.csv
+drawborders = yes
+extralinespacing = 0.3  # percentage
+pagesize = A4  # needs to be known in reportlab.lib.pagesizes
+unit = mm  # needs to be known in reportlab.lib.units
+
+[dimensions]
+margin_page_left = 7
+margin_page_top = 15
+
+width_label = 63.5
+height_label = 38.1
+
+margin_label_right = 3
+margin_label_top = 0
+pad_label = 6
+
+[fonts]
+fontdir = fonts
+fontname_name = Courier-Bold
+fontsize_name = 12
+fontname_address = Courier
+fontsize_address = 10
