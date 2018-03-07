@@ -39,7 +39,7 @@ class CanvasWithFontState(canvas.Canvas):
 
     def __init__(self, filename, pagesize):
         """Initialize a new canvas."""
-        self._currentfont = self.Font('Helvetica', 12)
+        self._currentfont = self.Font('Courier', 12)
         super().__init__(filename, pagesize=pagesize)
 
     def set_current_font(self, fontface, fontsize):
@@ -145,7 +145,7 @@ def main():
     canv = CanvasWithFontState('labels.pdf', pagesize=pagesize)
     canv.setTitle('Address labels')
     canv.setAuthor('Bart Van Loon')
-    canv.setSubject('Just some addresses on boxes...')
+    canv.setSubject('Just some addresses in boxes...')
     canv.setKeywords(
         ('address',
          'addresses',
