@@ -5,7 +5,6 @@
 
 import configparser
 import csv
-
 from collections import namedtuple
 from pathlib import Path
 
