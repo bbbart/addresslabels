@@ -152,7 +152,7 @@ def main():
         CONFIG['addresslabels']['pdffile'],
         pagesize=pagesize)
     canv.setTitle('Address labels')
-    canv.setAuthor('Bart Van Loon')
+    canv.setAuthor('addresslabels.py <bbb@bbbart.be>')
     canv.setSubject('Just some addresses in boxes...')
     canv.setKeywords(
         ('address',
