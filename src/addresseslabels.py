@@ -236,7 +236,7 @@ def installfont(fontname):
     """Registers a typeface and font based on the given name."""
     fontdir_afm = Path(CONFIG['fonts']['fontdir_afm'])
     fontdir_pfb = Path(CONFIG['fonts']['fontdir_pfb'])
-    fontfile_stem = fontname.lower()
+    fontfile_stem = fontname
     afm = (fontdir_afm / fontfile_stem).with_suffix('.afm')
     pfb = (fontdir_pfb / fontfile_stem).with_suffix('.pfb')
 
