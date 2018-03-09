@@ -142,7 +142,9 @@ def main():
 
     labels = loadcsv(CONFIG['addresslabels']['csvfile'])
 
-    canv = CanvasWithFontState('labels.pdf', pagesize=pagesize)
+    canv = CanvasWithFontState(
+        CONFIG['addresslabels']['pdffile'],
+        pagesize=pagesize)
     canv.setTitle('Address labels')
     canv.setAuthor('Bart Van Loon')
     canv.setSubject('Just some addresses in boxes...')
@@ -232,19 +234,20 @@ def main():
 
 def installfont(fontname):
     """Registers a typeface and font based on the given name."""
-    fontdir = Path(CONFIG['fonts']['fontdir'])
+    fontdir_afm = Path(CONFIG['fonts']['fontdir_afm'])
+    fontdir_pfb = Path(CONFIG['fonts']['fontdir_pfb'])
     fontfile_stem = fontname.lower()
-    afm = (fontdir / fontfile_stem).with_suffix('.afm')
-    pfb = (fontdir / fontfile_stem).with_suffix('.pfb')
+    afm = (fontdir_afm / fontfile_stem).with_suffix('.afm')
+    pfb = (fontdir_pfb / fontfile_stem).with_suffix('.pfb')
 
-    if afm.exists() and pfb.exists():
+    try:
         pdfmetrics.registerTypeFace(pdfmetrics.EmbeddedType1Face(afm, pfb))
         pdfmetrics.registerFont(
             pdfmetrics.Font(
                 fontname,
                 fontname,
                 'WinAnsiEncoding'))
-    else:
+    except AssertionError:
         raise FontFileNotFound(f'Cannot install font {fontname}. '
                                'Does its .afm and .pfb files exist?')
 
