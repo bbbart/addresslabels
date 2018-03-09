@@ -116,7 +116,8 @@ def loadcsv(csvfile):
                         city=row[3].strip(),
                         country=row[4].strip()))
             except IndexError:
-                print(f'Detected problem in row {index + 1} of {csvfile}! '
+                print(f' * Detected problem in row {index + 1} of {csvfile}: '
+                      'not enough columns. '
                       '(continuing anyway)')
 
     return labels
@@ -144,6 +145,7 @@ def main():
                 CONFIG['addresslabels']['pagesize']]),
         CONFIG['addresslabels']['pagesize'])
 
+    print(' * Reading ' + CONFIG['addresslabels']['csvfile'])
     labels = loadcsv(CONFIG['addresslabels']['csvfile'])
 
     canv = CanvasWithFontState(
@@ -233,6 +235,8 @@ def main():
                 canv.set_current_font(*canv.currentfont)
 
     canv.showPage()
+
+    print(' * Writing ' + CONFIG['addresslabels']['pdffile'])
     canv.save()
 
 
