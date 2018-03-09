@@ -106,14 +106,18 @@ def loadcsv(csvfile):
     labels = []
     with open(csvfile, 'r', newline='') as addressfile:
         addressreader = csv.reader(addressfile)
-        for row in addressreader:
-            labels.append(
-                Label(
-                    name=row[0].strip(),
-                    address=row[1].strip(),
-                    postalcode=row[2].strip(),
-                    city=row[3].strip(),
-                    country=row[4].strip()))
+        for index, row in enumerate(addressreader):
+            try:
+                labels.append(
+                    Label(
+                        name=row[0].strip(),
+                        address=row[1].strip(),
+                        postalcode=row[2].strip(),
+                        city=row[3].strip(),
+                        country=row[4].strip()))
+            except IndexError:
+                print(f'Detected problem in row {index + 1} of {csvfile}! '
+                      '(continuing anyway)')
 
     return labels
 
