@@ -107,6 +107,8 @@ def loadcsv(csvfile):
     with open(csvfile, 'r', newline='') as addressfile:
         addressreader = csv.reader(addressfile)
         for index, row in enumerate(addressreader):
+            if row[0][0] == CONFIG['addresslabels']['ignorelineprefix']:
+                continue
             try:
                 labels.append(
                     Label(

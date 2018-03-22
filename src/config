@@ -5,6 +5,7 @@ drawborders = yes
 extralinespacing = 0.3  # percentage
 pagesize = A4  # needs to be known in reportlab.lib.pagesizes
 unit = mm  # needs to be known in reportlab.lib.units
+ignorelineprefix = -
 
 [dimensions]
 margin_page_left = 7
