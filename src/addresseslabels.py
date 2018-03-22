@@ -33,7 +33,9 @@ class FontFileNotFound(Exception):
 
 class CanvasWithFontState(canvas.Canvas):
 
-    """Reportlab canvas which stores it currently active font face and size."""
+    """Reportlab canvas which stores its currently active font face and
+    size.
+    """
 
     Font = namedtuple('Font', ('face', 'size'))
 
@@ -55,8 +57,8 @@ class CanvasWithFontState(canvas.Canvas):
 
 class LineWriter:
 
-    """Convenience class to hold repetitive methods for advanced line writing to
-    reportlab canvases.
+    """Convenience class to hold methods to aid in line writing to reportlab
+    canvases.
     """
 
     def __init__(self, acanvas, maxwidth):
@@ -131,8 +133,7 @@ def main():
     unit = getattr(
         __import__(
             'reportlab.lib.units',
-            fromlist=[
-                CONFIG['addresslabels']['unit']]),
+            fromlist=[CONFIG['addresslabels']['unit']]),
         CONFIG['addresslabels']['unit'])
 
     dimensions = {}
@@ -143,8 +144,7 @@ def main():
     pagesize = getattr(
         __import__(
             'reportlab.lib.pagesizes',
-            fromlist=[
-                CONFIG['addresslabels']['pagesize']]),
+            fromlist=[CONFIG['addresslabels']['pagesize']]),
         CONFIG['addresslabels']['pagesize'])
 
     print(' * Reading ' + CONFIG['addresslabels']['csvfile'])
@@ -202,8 +202,8 @@ def main():
             CONFIG['fonts'].getint('fontsize_name'))
 
         x_name = x_label + dimensions['width_label'] / 2
-        y_name = y_label + dimensions['height_label'] / \
-            2 + textheight / 2 - canv._leading
+        y_name = y_label + dimensions['height_label'] / 2 +\
+            textheight / 2 - canv._leading
         numlines = linewriter.writetext(x_name, y_name, label.name)
 
         canv.set_current_font(
