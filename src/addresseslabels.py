@@ -109,8 +109,12 @@ def loadcsv(csvfile):
     with open(csvfile, 'r', newline='') as addressfile:
         addressreader = csv.reader(addressfile)
         for index, row in enumerate(addressreader):
-            if row[0][0] == CONFIG['addresslabels']['ignorelineprefix']:
-                continue
+            try:
+                if row[0][0] == CONFIG['addresslabels']['ignorelineprefix']:
+                    continue
+            except IndexError:
+                print(f' * Detected empty first column in row {index + 1} of '
+                      f'{csvfile}.')
             try:
                 labels.append(
                     Label(
@@ -122,7 +126,7 @@ def loadcsv(csvfile):
             except IndexError:
                 print(f' * Detected problem in row {index + 1} of {csvfile}: '
                       'not enough columns. '
-                      '(continuing anyway)')
+                      '(skipping and continuing anyway)')
 
     return labels
 
@@ -169,10 +173,12 @@ def main():
         dimensions['width_label'] -
         dimensions['pad_label'])
 
-    x_label = dimensions['margin_page_left']
-    y_label = pagesize[1] - \
+    x_label = x_label_orig = dimensions['margin_page_left']
+    y_label = y_label_orig = pagesize[1] - \
         (dimensions['margin_page_top'] + dimensions['height_label'])
-    for label in labels:
+
+    def addlabel(x_label, y_label, label):
+        """Add the given label to the given position on the current page."""
         if CONFIG['addresslabels'].getboolean('drawborders'):
             canv.rect(
                 x_label,
@@ -227,16 +233,19 @@ def main():
 
         x_label += dimensions['width_label'] + dimensions['margin_label_right']
         if x_label > pagesize[0] - dimensions['width_label']:
-            x_label = dimensions['margin_page_left']
-            y_label -= dimensions['height_label'] + \
+            x_label = x_label_orig
+            y_label -= dimensions['height_label'] +\
                 dimensions['margin_label_top']
             if y_label < 0:
-                y_label = pagesize[1] - \
-                    dimensions['margin_page_top'] - dimensions['height_label']
-                canv.showPage()
-                canv.set_current_font(*canv.currentfont)
+                y_label = y_label_orig
 
-    canv.showPage()
+        return x_label, y_label
+
+    x_label, y_label = addlabel(x_label_orig, y_label_orig, labels[0])
+    for label in labels[1:]:
+        if (x_label == x_label_orig and y_label == y_label_orig):
+            canv.showPage()
+        x_label, y_label = addlabel(x_label, y_label, label)
 
     print(' * Writing ' + CONFIG['addresslabels']['pdffile'])
     canv.save()
