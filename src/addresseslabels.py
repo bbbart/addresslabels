@@ -99,7 +99,7 @@ class LineWriter:
 
 def baselineskip(acanvas):
     """Calculate the baselineskip."""
-    return acanvas._leading * \
+    return acanvas._leading *\
         CONFIG['addresslabels'].getfloat('extralinespacing')
 
 
@@ -174,7 +174,7 @@ def main():
         dimensions['pad_label'])
 
     x_label = x_label_orig = dimensions['margin_page_left']
-    y_label = y_label_orig = pagesize[1] - \
+    y_label = y_label_orig = pagesize[1] -\
         (dimensions['margin_page_top'] + dimensions['height_label'])
 
     def addlabel(x_label, y_label, label):
