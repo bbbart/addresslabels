@@ -1,0 +1,40 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+astroid = "*"
+blessings = "*"
+bpython = "*"
+certifi = "*"
+chardet = "*"
+curtsies = "*"
+greenlet = "*"
+idna = "*"
+lazy-object-proxy = "*"
+Pillow = "*"
+Pygments = "*"
+reportlab = "*"
+requests = "*"
+six = "*"
+snowballstemmer = "*"
+"urllib3" = "*"
+wcwidth = "*"
+wrapt = "*"
+
+[dev-packages]
+"autopep8" = "*"
+"flake8" = "*"
+futures = "*"
+isort = "*"
+mccabe = "*"
+pycodestyle = "*"
+pydocstyle = "*"
+pyflakes = "*"
+pylama = "*"
+pylint = "*"
+typing = "*"
+
+[requires]
+python_version = "3.7"
