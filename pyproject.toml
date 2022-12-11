@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "addresslabels"
+version = "1.0"
+description = "Quick Python script to create simple PDF with addresses to print on label sheets."
+authors = ["Bart Van Loon <bbb@bbbart.be>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+reportlab = "^3.6.12"
+
+[tool.poetry.group.dev.dependencies]
+bpython = "^0.23"
+ropevim = "^0.8.1"
+pylint = "^2.15.8"
+pudb = "^2022.1.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
